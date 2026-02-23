@@ -9,10 +9,10 @@ flowchart TD
     G -- No --> H[Proceed to Google Calendar check]
     G -- Yes --> I[Open coverage request email]
     I --> J{Is requesting teacher a high school teacher?}
-    J -- No --> K[Do not cover and delete coverage email]
-    J -- Yes --> L{Free from lab setup or teardown at that time?}
+    J -- No --> K[Do not cover; delete coverage email]
+    J -- Yes --> L{Free from lab setup/teardown at that time?}
     L -- No --> K
-    L -- Yes --> M{Prior knowledge of students for grades 9-11 only?}
+    L -- Yes --> M{Prior knowledge of students?<br/>9th-11th grade only}
     M -- No --> K
     M -- Yes --> N[Accept coverage]
     N --> O[Open coverage spreadsheet attached to email]
@@ -29,47 +29,47 @@ flowchart TD
     U --> V
     V -- Yes --> W[Record lunch duty reminder on whiteboard]
     V -- No --> X[No lunch duty reminder needed]
-    W --> Y[Create paper with 4 columns SH L PB AS]
+    W --> Y[Create paper with 4 columns: SH, L, PB, AS]
     X --> Y
 
     Y --> Z[Mark through L column if lunch duty assigned]
     Z --> AA[Mark through AS column if PLC meeting scheduled]
     AA --> AB[List assignments to grade in PB]
-    AB --> AC[List emails to send or respond in SH]
+    AB --> AC[List emails to send/respond in SH]
     AC --> AD[List positive communication home recipient in SH]
-    AD --> AE[List lab related needs in SH and L]
+    AD --> AE[List lab-related needs in SH and L]
     AE --> AF[List unexpected tasks in AS]
 
-    AF --> AG[Study Hall email procedures and positive communication tasks]
+    AF --> AG[Study Hall (SH): positive communication + email tasks]
     AG --> AH[Read SH note for student receiving positive communication]
     AH --> AI[Open Gmail compose]
-    AI --> AJ[Open RHS Hub then Positive Communication feedback form]
-    AJ --> AK[Open Google Drive then Parent Communication SP26 spreadsheet]
-    AK --> AL[Click student bell tab]
+    AI --> AJ[Open RHS Hub > Positive Communication feedback form]
+    AJ --> AK[Open Google Drive > Parent Communication SP26 spreadsheet]
+    AK --> AL[Click student's bell tab]
     AL --> AM[Open ProgressBook gradebook and select bell]
-    AM --> AN[Select student then Contact then copy parent email]
+    AM --> AN[Select student > Contact > Copy parent email]
     AN --> AO[Paste parent email into new message]
-    AO --> AP[Subject line student first name great day in science]
+    AO --> AP[Subject: "student first name - great day in science"]
     AP --> AQ[Write positive behavior email and send]
-    AQ --> AR[Update SP26 spreadsheet date format reason]
+    AQ --> AR[Update SP26 spreadsheet: date, format, reason]
     AR --> AS[Complete Positive Communication Google form]
     AS --> AT[Read emails received 7:00-9:55 AM]
     AT --> AU[Respond to emails with specific requests]
     AU --> AV[Delete emails that do not require retention]
 
-    AV --> AW[Lunch lab supply reset]
-    AW --> AX[When students leave for lunch walk quick room lap for misplaced supplies]
+    AV --> AW[Lunch (L): lab supply reset]
+    AW --> AX[When students leave for lunch, walk quick room lap for misplaced supplies]
     AX --> AY[Open lesson sequence file]
     AY --> AZ[Click daily lesson summary]
-    AZ --> BA[Compare front table supplies with lesson summary list]
+    AZ --> BA[Compare front-table supplies with lesson summary list]
     BA --> BB{Supplies match lesson sequence list?}
     BB -- No --> BC[Get missing supplies from lab supply cabinet]
     BB -- Yes --> BD[No supply retrieval needed]
-    BC --> BE[If supplies cannot be replaced document shortage on Wish List spreadsheet]
+    BC --> BE[If supplies cannot be replaced, document shortage on Wish List spreadsheet]
     BD --> BF[Proceed to Plan Bell]
     BE --> BF
 
-    BF --> BG{Plan Bell day type}
+    BF --> BG{Plan Bell (PB) day type}
     BG -- Monday-Thursday --> BH[Open ProgressBook gradebook]
     BH --> BI[Select bell]
     BI --> BJ[Select assignment]
@@ -84,20 +84,20 @@ flowchart TD
     BP --> BQ[Open ProgressBook gradebook]
     BQ --> BR[Select Bell 1 and weekly Snorkl assignment]
     BR --> BS[Open Snorkl and drag tab to second screen]
-    BS --> BT[Snorkl classes Bell 1]
+    BS --> BT[Snorkl: Classes > Bell 1]
     BT --> BU[Verify submissions sorted by last name and highest score shown]
     BU --> BV[Enter 10 in ProgressBook for students scoring 3 or 4]
     BV --> BW[Play recordings for students scoring 1 or 2]
     BW --> BX[Score using rubric for 1s and 2s]
-    BX --> BY[Enter 0 for non submissions]
-    BY --> BZ[Repeat Snorkl grading steps for bells 2 3 6 7]
+    BX --> BY[Enter 0 for non-submissions]
+    BY --> BZ[Repeat Snorkl grading steps for bells 2, 3, 6, and 7]
 
-    BO --> CA[After School classroom reset]
+    BO --> CA[After School (AS): classroom reset]
     BZ --> CA
     CA --> CB[Walk a lap around room]
     CB --> CC[Remove items left in sinks]
-    CC --> CD[Inspect eyewash stations turn off any running station return handle upright]
-    CD --> CE[Count chairs at each table add chairs until each table has two]
+    CC --> CD[Inspect eyewash stations; turn off any running station and return handle upright]
+    CD --> CE[Count chairs at each table; add chairs until each table has two]
     CE --> CF[Pick up trash]
     CF --> CG[Pick up pencils and store in desk container]
     CG --> CH[Return all supplies to cabinet]
@@ -109,6 +109,13 @@ flowchart TD
     CK -- Parent contact not found --> CM[Record issue and notify administration]
     CK -- Grading incomplete --> CN[Carry remaining grading to next available time block]
     CK -- None --> CO([End: Day concludes with tasks completed deferred scheduled and classroom reset])
+    CI --> CJ[Put next-day supplies on front table]
+
+    CJ --> CK{Any exceptions/contingencies encountered?}
+    CK -- Required system unavailable --> CL[Defer affected task and reschedule]
+    CK -- Parent contact not found --> CM[Record issue and notify administration]
+    CK -- Grading incomplete --> CN[Carry remaining grading to next available time block]
+    CK -- None --> CO([End: Day concludes with tasks completed/deferred/scheduled and classroom reset])
     CL --> CO
     CM --> CO
     CN --> CO
