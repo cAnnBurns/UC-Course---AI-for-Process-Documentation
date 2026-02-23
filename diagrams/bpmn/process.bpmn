@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  id="Definitions_DailyTaskPrioritization"
+                  targetNamespace="http://example.com/bpmn/daily-task-prioritization">
+  <bpmn:process id="DailyTaskPrioritizationProcess" name="Daily Task Prioritization SOP" isExecutable="false">
+    <bpmn:startEvent id="StartEvent_DayBegins" name="Start of school day"/>
+
+    <bpmn:task id="Task_MorningSetup" name="Morning setup: log in, open Gmail/ProgressBook, review 5:00–7:00 emails"/>
+    <bpmn:exclusiveGateway id="Gateway_CoverageEmail" name="Coverage request received?"/>
+    <bpmn:task id="Task_RunCoverageMatrix" name="Apply coverage decision matrix (all criteria met?)"/>
+    <bpmn:exclusiveGateway id="Gateway_CoverageApproved" name="Coverage approved?"/>
+    <bpmn:task id="Task_RecordCoverage" name="Record name on coverage spreadsheet"/>
+    <bpmn:task id="Task_DeleteCoverageEmail" name="Delete coverage email"/>
+
+    <bpmn:task id="Task_CheckCalendar" name="Check Google Calendar for PLC or lunch duty"/>
+    <bpmn:exclusiveGateway id="Gateway_HasCalendarItems" name="PLC meeting or lunch duty scheduled?"/>
+    <bpmn:task id="Task_WriteReminders" name="Write required reminders on whiteboard"/>
+
+    <bpmn:task id="Task_BuildPrioritySheet" name="Build SH/L/PB/AS priority sheet and list required work"/>
+
+    <bpmn:task id="Task_StudyHallWork" name="Study Hall: positive communication home + email responses"/>
+    <bpmn:exclusiveGateway id="Gateway_SystemAvailableSH" name="Required systems available?"/>
+    <bpmn:task id="Task_DeferSH" name="Defer/reschedule blocked Study Hall tasks"/>
+
+    <bpmn:task id="Task_LunchLabReset" name="Lunch: lab supply reset and lesson-summary check"/>
+    <bpmn:exclusiveGateway id="Gateway_LunchDuty" name="Lunch duty assigned?"/>
+
+    <bpmn:task id="Task_GradePlanBell" name="Plan Bell: grading workflow"/>
+    <bpmn:exclusiveGateway id="Gateway_Friday" name="Is it Friday?"/>
+    <bpmn:task id="Task_WeekdayGrading" name="Mon–Thu: grade assignments and enter ProgressBook scores"/>
+    <bpmn:task id="Task_FridaySnorkl" name="Friday: score Snorkl by rubric and enter grades"/>
+    <bpmn:exclusiveGateway id="Gateway_GradingComplete" name="Grading complete in time block?"/>
+    <bpmn:task id="Task_CarryForwardGrading" name="Carry remaining grading to next available time block"/>
+
+    <bpmn:exclusiveGateway id="Gateway_HasPLC" name="PLC meeting after school?"/>
+    <bpmn:task id="Task_PLCMeeting" name="Attend PLC meeting"/>
+    <bpmn:task id="Task_AfterSchoolReset" name="After School: classroom reset and next-day staging"/>
+
+    <bpmn:endEvent id="EndEvent_DayClosed" name="End of school day (tasks completed, deferred, or scheduled)"/>
+
+    <bpmn:sequenceFlow id="Flow_01" sourceRef="StartEvent_DayBegins" targetRef="Task_MorningSetup"/>
+    <bpmn:sequenceFlow id="Flow_02" sourceRef="Task_MorningSetup" targetRef="Gateway_CoverageEmail"/>
+
+    <bpmn:sequenceFlow id="Flow_03_yes" sourceRef="Gateway_CoverageEmail" targetRef="Task_RunCoverageMatrix" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_03_no" sourceRef="Gateway_CoverageEmail" targetRef="Task_CheckCalendar" name="No"/>
+
+    <bpmn:sequenceFlow id="Flow_04" sourceRef="Task_RunCoverageMatrix" targetRef="Gateway_CoverageApproved"/>
+    <bpmn:sequenceFlow id="Flow_05_yes" sourceRef="Gateway_CoverageApproved" targetRef="Task_RecordCoverage" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_05_no" sourceRef="Gateway_CoverageApproved" targetRef="Task_DeleteCoverageEmail" name="No"/>
+    <bpmn:sequenceFlow id="Flow_06a" sourceRef="Task_RecordCoverage" targetRef="Task_CheckCalendar"/>
+    <bpmn:sequenceFlow id="Flow_06b" sourceRef="Task_DeleteCoverageEmail" targetRef="Task_CheckCalendar"/>
+
+    <bpmn:sequenceFlow id="Flow_07" sourceRef="Task_CheckCalendar" targetRef="Gateway_HasCalendarItems"/>
+    <bpmn:sequenceFlow id="Flow_08_yes" sourceRef="Gateway_HasCalendarItems" targetRef="Task_WriteReminders" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_08_no" sourceRef="Gateway_HasCalendarItems" targetRef="Task_BuildPrioritySheet" name="No"/>
+    <bpmn:sequenceFlow id="Flow_09" sourceRef="Task_WriteReminders" targetRef="Task_BuildPrioritySheet"/>
+
+    <bpmn:sequenceFlow id="Flow_10" sourceRef="Task_BuildPrioritySheet" targetRef="Task_StudyHallWork"/>
+    <bpmn:sequenceFlow id="Flow_11" sourceRef="Task_StudyHallWork" targetRef="Gateway_SystemAvailableSH"/>
+    <bpmn:sequenceFlow id="Flow_12_yes" sourceRef="Gateway_SystemAvailableSH" targetRef="Gateway_LunchDuty" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_12_no" sourceRef="Gateway_SystemAvailableSH" targetRef="Task_DeferSH" name="No"/>
+    <bpmn:sequenceFlow id="Flow_13" sourceRef="Task_DeferSH" targetRef="Gateway_LunchDuty"/>
+
+    <bpmn:sequenceFlow id="Flow_14_yes" sourceRef="Gateway_LunchDuty" targetRef="Task_GradePlanBell" name="Yes (skip Lunch block)"/>
+    <bpmn:sequenceFlow id="Flow_14_no" sourceRef="Gateway_LunchDuty" targetRef="Task_LunchLabReset" name="No"/>
+    <bpmn:sequenceFlow id="Flow_15" sourceRef="Task_LunchLabReset" targetRef="Task_GradePlanBell"/>
+
+    <bpmn:sequenceFlow id="Flow_16" sourceRef="Task_GradePlanBell" targetRef="Gateway_Friday"/>
+    <bpmn:sequenceFlow id="Flow_17_yes" sourceRef="Gateway_Friday" targetRef="Task_FridaySnorkl" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_17_no" sourceRef="Gateway_Friday" targetRef="Task_WeekdayGrading" name="No"/>
+    <bpmn:sequenceFlow id="Flow_18a" sourceRef="Task_FridaySnorkl" targetRef="Gateway_GradingComplete"/>
+    <bpmn:sequenceFlow id="Flow_18b" sourceRef="Task_WeekdayGrading" targetRef="Gateway_GradingComplete"/>
+
+    <bpmn:sequenceFlow id="Flow_19_yes" sourceRef="Gateway_GradingComplete" targetRef="Gateway_HasPLC" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_19_no" sourceRef="Gateway_GradingComplete" targetRef="Task_CarryForwardGrading" name="No"/>
+    <bpmn:sequenceFlow id="Flow_20" sourceRef="Task_CarryForwardGrading" targetRef="Gateway_HasPLC"/>
+
+    <bpmn:sequenceFlow id="Flow_21_yes" sourceRef="Gateway_HasPLC" targetRef="Task_PLCMeeting" name="Yes"/>
+    <bpmn:sequenceFlow id="Flow_21_no" sourceRef="Gateway_HasPLC" targetRef="Task_AfterSchoolReset" name="No"/>
+    <bpmn:sequenceFlow id="Flow_22" sourceRef="Task_PLCMeeting" targetRef="Task_AfterSchoolReset"/>
+    <bpmn:sequenceFlow id="Flow_23" sourceRef="Task_AfterSchoolReset" targetRef="EndEvent_DayClosed"/>
+  </bpmn:process>
+</bpmn:definitions>
