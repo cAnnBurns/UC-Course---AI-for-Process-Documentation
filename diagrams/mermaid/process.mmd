@@ -1,0 +1,114 @@
+flowchart TD
+    A([Start: Begin school day during initial 15-minute morning block]) --> B[Plug computer into charging area]
+    B --> C[Log in to computer]
+    C --> D[Open Gmail and log in]
+    D --> E[Open ProgressBook and sign in]
+    E --> F[Read subject lines for emails received 5:00-7:00 AM]
+
+    F --> G{Coverage request email?}
+    G -- No --> H[Proceed to Google Calendar check]
+    G -- Yes --> I[Open coverage request email]
+    I --> J{Is requesting teacher a high school teacher?}
+    J -- No --> K[Do not cover and delete coverage email]
+    J -- Yes --> L{Free from lab setup or teardown at that time?}
+    L -- No --> K
+    L -- Yes --> M{Prior knowledge of students for grades 9-11 only?}
+    M -- No --> K
+    M -- Yes --> N[Accept coverage]
+    N --> O[Open coverage spreadsheet attached to email]
+    O --> P[Click correct day of week]
+    P --> Q[Record first initial and last name by bell you can cover]
+    K --> H
+    Q --> H
+
+    H --> R[Open Google Calendar]
+    R --> S{PLC meeting after school?}
+    S -- Yes --> T[Write PLC reminder on whiteboard]
+    S -- No --> U[No PLC reminder needed]
+    T --> V{Lunch duty assigned?}
+    U --> V
+    V -- Yes --> W[Record lunch duty reminder on whiteboard]
+    V -- No --> X[No lunch duty reminder needed]
+    W --> Y[Create paper with 4 columns SH L PB AS]
+    X --> Y
+
+    Y --> Z[Mark through L column if lunch duty assigned]
+    Z --> AA[Mark through AS column if PLC meeting scheduled]
+    AA --> AB[List assignments to grade in PB]
+    AB --> AC[List emails to send or respond in SH]
+    AC --> AD[List positive communication home recipient in SH]
+    AD --> AE[List lab related needs in SH and L]
+    AE --> AF[List unexpected tasks in AS]
+
+    AF --> AG[Study Hall email procedures and positive communication tasks]
+    AG --> AH[Read SH note for student receiving positive communication]
+    AH --> AI[Open Gmail compose]
+    AI --> AJ[Open RHS Hub then Positive Communication feedback form]
+    AJ --> AK[Open Google Drive then Parent Communication SP26 spreadsheet]
+    AK --> AL[Click student bell tab]
+    AL --> AM[Open ProgressBook gradebook and select bell]
+    AM --> AN[Select student then Contact then copy parent email]
+    AN --> AO[Paste parent email into new message]
+    AO --> AP[Subject line student first name great day in science]
+    AP --> AQ[Write positive behavior email and send]
+    AQ --> AR[Update SP26 spreadsheet date format reason]
+    AR --> AS[Complete Positive Communication Google form]
+    AS --> AT[Read emails received 7:00-9:55 AM]
+    AT --> AU[Respond to emails with specific requests]
+    AU --> AV[Delete emails that do not require retention]
+
+    AV --> AW[Lunch lab supply reset]
+    AW --> AX[When students leave for lunch walk quick room lap for misplaced supplies]
+    AX --> AY[Open lesson sequence file]
+    AY --> AZ[Click daily lesson summary]
+    AZ --> BA[Compare front table supplies with lesson summary list]
+    BA --> BB{Supplies match lesson sequence list?}
+    BB -- No --> BC[Get missing supplies from lab supply cabinet]
+    BB -- Yes --> BD[No supply retrieval needed]
+    BC --> BE[If supplies cannot be replaced document shortage on Wish List spreadsheet]
+    BD --> BF[Proceed to Plan Bell]
+    BE --> BF
+
+    BF --> BG{Plan Bell day type}
+    BG -- Monday-Thursday --> BH[Open ProgressBook gradebook]
+    BH --> BI[Select bell]
+    BI --> BJ[Select assignment]
+    BJ --> BK{Assignment on Google Classroom?}
+    BK -- Yes --> BL[Grade assignment for current bell]
+    BK -- No --> BM[Alphabetize paper assignments by last name]
+    BM --> BL
+    BL --> BN[Enter grades in ProgressBook under selected assignment tab]
+    BN --> BO[Repeat for each bell]
+
+    BG -- Friday --> BP[Connect computer to second screen]
+    BP --> BQ[Open ProgressBook gradebook]
+    BQ --> BR[Select Bell 1 and weekly Snorkl assignment]
+    BR --> BS[Open Snorkl and drag tab to second screen]
+    BS --> BT[Snorkl classes Bell 1]
+    BT --> BU[Verify submissions sorted by last name and highest score shown]
+    BU --> BV[Enter 10 in ProgressBook for students scoring 3 or 4]
+    BV --> BW[Play recordings for students scoring 1 or 2]
+    BW --> BX[Score using rubric for 1s and 2s]
+    BX --> BY[Enter 0 for non submissions]
+    BY --> BZ[Repeat Snorkl grading steps for bells 2 3 6 7]
+
+    BO --> CA[After School classroom reset]
+    BZ --> CA
+    CA --> CB[Walk a lap around room]
+    CB --> CC[Remove items left in sinks]
+    CC --> CD[Inspect eyewash stations turn off any running station return handle upright]
+    CD --> CE[Count chairs at each table add chairs until each table has two]
+    CE --> CF[Pick up trash]
+    CF --> CG[Pick up pencils and store in desk container]
+    CG --> CH[Return all supplies to cabinet]
+    CH --> CI[Wash glassware as needed]
+    CI --> CJ[Put next day supplies on front table]
+
+    CJ --> CK{Any exceptions or contingencies encountered?}
+    CK -- Required system unavailable --> CL[Defer affected task and reschedule]
+    CK -- Parent contact not found --> CM[Record issue and notify administration]
+    CK -- Grading incomplete --> CN[Carry remaining grading to next available time block]
+    CK -- None --> CO([End: Day concludes with tasks completed deferred scheduled and classroom reset])
+    CL --> CO
+    CM --> CO
+    CN --> CO
