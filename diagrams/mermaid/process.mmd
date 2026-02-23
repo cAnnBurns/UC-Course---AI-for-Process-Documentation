@@ -102,6 +102,13 @@ flowchart TD
     CF --> CG[Pick up pencils and store in desk container]
     CG --> CH[Return all supplies to cabinet]
     CH --> CI[Wash glassware as needed]
+    CI --> CJ[Put next day supplies on front table]
+
+    CJ --> CK{Any exceptions or contingencies encountered?}
+    CK -- Required system unavailable --> CL[Defer affected task and reschedule]
+    CK -- Parent contact not found --> CM[Record issue and notify administration]
+    CK -- Grading incomplete --> CN[Carry remaining grading to next available time block]
+    CK -- None --> CO([End: Day concludes with tasks completed deferred scheduled and classroom reset])
     CI --> CJ[Put next-day supplies on front table]
 
     CJ --> CK{Any exceptions/contingencies encountered?}
